@@ -1,0 +1,27 @@
+# Python caches and artifacts
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments (not needed in the container)
+venv/
+env/
+
+# Django static files, if built locally (optional)
+staticfiles/
+
+# Logs and environment files
+*.log
+.env
+
+# Git repository files
+.git
+.gitignore
+
+# Docker Compose file and this ignore file itself
+docker-compose.yml
+.dockerignore
+
+# IDE and editor folders
+.vscode/
+.idea/

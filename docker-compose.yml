@@ -1,0 +1,68 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - clickhouse
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: clickpulse_db
+      POSTGRES_USER: clickpulse_user
+      POSTGRES_PASSWORD: secretpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  clickhouse:
+    image: yandex/clickhouse-server:latest
+    ports:
+      - "8123:8123"  # HTTP interface
+      - "9000:9000"  # Native interface
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ALLOW_EMBEDDING=true
+      - GF_INSTALL_PLUGINS=grafana-simple-json-datasource
+      - GF_SECURITY_ADMIN_PASSWORD=Dg@clickh02
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - clickhouse
+
+  data_ingestion:
+    build: .
+    command: python scripts/ingest_data.py
+    volumes:
+      - .:/code
+    depends_on:
+      - clickhouse
+    restart: "no"
+
+  realtime_simulator:
+    build: .
+    command: python scripts/simulate_realtime.py
+    volumes:
+      - .:/code
+    depends_on:
+      - clickhouse
+    restart: always
+
+volumes:
+  pgdata:
+  clickhouse_data:
+  grafana_data:

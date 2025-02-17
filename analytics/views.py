@@ -1,0 +1,28 @@
+# C:\Users\David\Apps-Start\Start-ClickPulse\analytics\views.py
+from django.http import JsonResponse
+from .clickhouse_queries import measure_total_sales_query_time
+from django.shortcuts import render
+from .clickhouse_queries import (
+    get_total_sales_per_day,
+    get_total_sales_by_country,
+    get_average_order_value,
+)
+
+def total_sales_per_day_view(request):
+    data = get_total_sales_per_day()
+    return JsonResponse(data, safe=False)
+
+def total_sales_by_country_view(request):
+    data = get_total_sales_by_country()
+    return JsonResponse(data, safe=False)
+
+def average_order_value_view(request):
+    avg_value = get_average_order_value()
+    return JsonResponse({"average_order_value": avg_value})
+
+def grafana_dashboard(request):
+    return render(request, "analytics/grafana_dashboard.html")
+
+def performance_metric_view(request):
+    execution_time = measure_total_sales_query_time()
+    return JsonResponse({"total_sales_query_time_ms": execution_time})
