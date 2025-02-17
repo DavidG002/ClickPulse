@@ -40,6 +40,8 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=Dg@clickh02
       - GF_SERVER_ROOT_URL=https://clickpulse.daveedg.com/grafana-dash/
       - GF_SERVER_SERVE_FROM_SUB_PATH=true
+      - GF_SERVER_DOMAIN=clickpulse.daveedg.com
+      - GF_SERVER_PROTOCOL=https
     volumes:
       - grafana_data:/var/lib/grafana
     depends_on:
