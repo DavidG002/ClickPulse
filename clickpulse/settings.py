@@ -11,7 +11,7 @@ SECRET_KEY = 'django-insecure-pq_kdy-&qe*sagf$tl!d#alut_h27n4=cgnc$jt6-wj-1v1)%n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['web', 'localhost']
+ALLOWED_HOSTS = ['web', 'localhost', 'clickpulse.daveedg.com']
 
 
 # Application definition
