@@ -38,6 +38,8 @@ services:
       - GF_SECURITY_ALLOW_EMBEDDING=true
       - GF_INSTALL_PLUGINS=grafana-simple-json-datasource
       - GF_SECURITY_ADMIN_PASSWORD=Dg@clickh02
+      - GF_SERVER_ROOT_URL=%(protocol)s://%(domain)s/grafana-dash/
+      - GF_SERVER_SERVE_FROM_SUB_PATH=true
     volumes:
       - grafana_data:/var/lib/grafana
     depends_on:
