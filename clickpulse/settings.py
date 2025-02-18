@@ -1,17 +1,28 @@
 # C:\Users\David\Apps-Start\Start-ClickPulse\clickpulse\settings.py
 
+import os
 from pathlib import Path
+import environ
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env(
+    DEBUG=(bool, True)
+)
+
+# reading .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-pq_kdy-&qe*sagf$tl!d#alut_h27n4=cgnc$jt6-wj-1v1)%n'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['web', 'localhost', 'clickpulse.daveedg.com']
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['web', 'localhost', 'clickpulse.daveedg.com'])
 
 
 # Application definition

@@ -1,7 +1,8 @@
 # C:\Users\David\Apps-Start\Start-ClickPulse\analytics\views.py
 from django.http import JsonResponse
 from .clickhouse_queries import measure_total_sales_query_time
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.conf import settings
 from .clickhouse_queries import (
     get_total_sales_per_day,
     get_total_sales_by_country,
@@ -20,9 +21,13 @@ def average_order_value_view(request):
     avg_value = get_average_order_value()
     return JsonResponse({"average_order_value": avg_value})
 
-def grafana_dashboard(request):
-    return render(request, "analytics/grafana_dashboard.html")
-
 def performance_metric_view(request):
     execution_time = measure_total_sales_query_time()
     return JsonResponse({"total_sales_query_time_ms": execution_time})
+
+def grafana_dashboard(request):
+    if settings.DEBUG:
+        grafana_url = grafana_url = "http://localhost:3000/public-dashboards/4322a863d08641a7a36dc54bd2d3c146"
+    else:
+        grafana_url = "https://clickpulse.daveedg.com/grafana-dash/public-dashboards/4322a863d08641a7a36dc54bd2d3c146"
+    return render(request, "analytics/grafana_dashboard.html", {"grafana_url": grafana_url})

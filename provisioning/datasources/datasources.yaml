@@ -1,0 +1,19 @@
+apiVersion: 1
+
+datasources:
+  - name: "analytics_performance"
+    type: "simplejson"
+    access: proxy
+    url: "http://web:8000/api/analytics/performance/"
+    isDefault: false
+    basicAuth: false
+
+  - name: ClickHouse
+    type: clickhouse
+    access: proxy
+    url: http://clickhouse:8123  # Use the service name or IP as seen by Grafana
+    isDefault: true
+    editable: false
+    jsonData:
+      # Additional ClickHouse options can go here, for example:
+      httpMode: GET
