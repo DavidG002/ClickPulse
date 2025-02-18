@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Deploy to VPS via SSH
-        uses: appleboy/ssh-action@v0.8.1
+        uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VPS_HOST }}        # e.g., 153.92.223.133
           username: ${{ secrets.VPS_USER }}      # e.g., "David" or your deployment user
