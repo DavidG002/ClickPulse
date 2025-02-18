@@ -8,12 +8,12 @@ datasources:
     isDefault: false
     basicAuth: false
 
-  - name: ClickHouse
-    type: clickhouse
+  - name: "ClickHouse"
+    type: "vertamedia-clickhouse-datasource"
     access: proxy
-    url: http://clickhouse:8123  # Use the service name or IP as seen by Grafana
+    url: "http://clickhouse:8123"
     isDefault: true
     editable: false
+    basicAuth: false
     jsonData:
-      # Additional ClickHouse options can go here, for example:
       httpMode: GET
