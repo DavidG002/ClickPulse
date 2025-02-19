@@ -38,5 +38,6 @@ jobs:
             git config --global --add safe.directory /srv/clickpulse
             git fetch --all
             git reset --hard origin/main
+            git clean -fd
             docker compose down
             docker compose up --build -d
