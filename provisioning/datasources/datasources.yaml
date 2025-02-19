@@ -9,7 +9,7 @@ datasources:
     basicAuth: false
 
   - name: "ClickPulse Analytics DataSource"
-    type: "grafana-clickhouse-datasource"
+    type: "ClickHouse"
     access: proxy
     url: "http://clickhouse:8123"
     isDefault: true
