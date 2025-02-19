@@ -36,7 +36,7 @@ services:
       - "${GRAFANA_PORT:-3000}:3000"
     environment:
       - GF_SECURITY_ALLOW_EMBEDDING=${GF_SECURITY_ALLOW_EMBEDDING}
-      - GF_INSTALL_PLUGINS=simpod-json-datasource,vertamedia-clickhouse-datasource
+      - GF_INSTALL_PLUGINS=simpod-json-datasource,grafana-clickhouse-datasource
       - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL:-http://localhost:3000}
       - GF_SERVER_SERVE_FROM_SUB_PATH=${GF_SERVER_SERVE_FROM_SUB_PATH:-false}
       - GF_SERVER_DOMAIN=${GF_SERVER_DOMAIN:-localhost}
