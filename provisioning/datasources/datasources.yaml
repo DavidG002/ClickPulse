@@ -9,7 +9,7 @@ datasources:
     basicAuth: false
 
   - name: "ClickPulse Analytics DataSource"
-    type: "vertamedia-clickhouse-datasource"
+    type: "clickhouse"
     access: proxy
     url: "http://clickhouse:8123"
     isDefault: true
