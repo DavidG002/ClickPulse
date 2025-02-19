@@ -9,11 +9,15 @@ datasources:
     basicAuth: false
 
   - name: "ClickPulse Analytics DataSource"
-    type: "clickhouse"
+    type: "grafana-clickhouse-datasource"
     access: proxy
     url: "http://clickhouse:8123"
     isDefault: true
     editable: false
     basicAuth: false
     jsonData:
-      httpMode: GET
+      defaultDatabase: "default"
+      port: 9000
+      host: "clickhouse"
+      username: "default"
+      tlsSkipVerify: false
