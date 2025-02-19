@@ -36,8 +36,8 @@ jobs:
             export SECRET_KEY="${{ secrets.SECRET_KEY }}"
             # Ensure Git considers this directory safe:
             git config --global --add safe.directory /srv/clickpulse
-            git fetch --all
-            git reset --hard origin/main
+            git pull origin main
+            git clean -fd
             git clean -fd
             docker compose down
             docker compose up --build -d
