@@ -5,108 +5,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ClickPulse: ClickHouse Analytics Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-            color: #333;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        h1 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .description {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-        .description a {
-            color: #2980b9;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .description a:hover {
-            text-decoration: underline;
-        }
-        .benefits {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        .benefit-card {
-            background-color: #fff;
-            width: 200px;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .benefit-card h3 {
-            color: #e74c3c;
-            margin: 0 0 10px;
-            font-size: 18px;
-        }
-        .benefit-card p {
-            margin: 0;
-            font-size: 14px;
-        }
-        iframe {
-            width: 100%;
-            height: 800px;
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+        .clickhouse-yellow { color: #FCFE4F; } /* ClickHouse branding */
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>ClickPulse: ClickHouse Analytics Demo</h1>
-        
-        <div class="description">
-            <p>Welcome to ClickPulse, a lightweight demo showcasing the power of <strong>ClickHouse</strong>—an open-source, column-oriented database—for real-time analytics. This app integrates ClickHouse with Grafana to visualize sales data from a CSV file, featuring a real-time simulator that updates the dashboard live. Built with simplicity and speed in mind, it demonstrates how ClickHouse can handle fast, scalable analytics for modern applications. Check out the source code and details on <a href="https://github.com/DavidG002/ClickPulse" target="_blank">GitHub</a>.</p>
+<body class="bg-black text-white font-sans">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center text-white mb-6">
+            <span class="clickhouse-yellow">ClickPulse</span>: ClickHouse Analytics Demo
+        </h1>
+
+        <div class="bg-gray-800 p-6 rounded-lg shadow-md mb-6">
+            <p class="text-lg leading-relaxed">
+                Welcome to <span class="font-semibold clickhouse-yellow">ClickPulse</span>, a dynamic demo showcasing 
+                <span class="font-semibold text-red-400">ClickHouse</span>—an open-source, column-oriented database—for 
+                real-time analytics. This app ingests large, complex CSV files—spanning sales, finance, e-commerce, 
+                statistics, logistics, IoT, and raw operational data—into ClickHouse and visualizes it with Grafana. 
+                The dashboard below uses real e-commerce data from the UCI “Online Retail” dataset, featuring over 
+                500,000 transactions from a UK retailer (2010-2011), highlighting gift sales trends. Built to demonstrate 
+                simplicity, speed, and scalability, it shows how ClickHouse transforms data into actionable insights. 
+                Dive into the source code and details on 
+                <a href="https://github.com/DavidG002/ClickPulse" target="_blank" class="text-blue-400 font-semibold hover:underline">GitHub</a>.
+            </p>
         </div>
 
-        <div class="benefits">
-            <div class="benefit-card">
-                <h3>Simplicity</h3>
-                <p>Easy setup with ClickHouse and Grafana for rapid analytics deployment.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div class="bg-gray-800 p-4 rounded-lg shadow-md text-center">
+                <h3 class="text-xl font-semibold clickhouse-yellow mb-2">Simplicity</h3>
+                <p class="text-sm">Quick setup with ClickHouse and Grafana for effortless analytics.</p>
             </div>
-            <div class="benefit-card">
-                <h3>Powerful</h3>
-                <p>Handles complex queries on large datasets with column-oriented efficiency.</p>
+            <div class="bg-gray-800 p-4 rounded-lg shadow-md text-center">
+                <h3 class="text-xl font-semibold clickhouse-yellow mb-2">Powerful</h3>
+                <p class="text-sm">Handles complex queries on large datasets with ease.</p>
             </div>
-            <div class="benefit-card">
-                <h3>Fast</h3>
-                <p>Delivers sub-second query performance for instant insights.</p>
+            <div class="bg-gray-800 p-4 rounded-lg shadow-md text-center">
+                <h3 class="text-xl font-semibold clickhouse-yellow mb-2">Fast</h3>
+                <p class="text-sm">Sub-second query performance for instant insights.</p>
             </div>
-            <div class="benefit-card">
-                <h3>Real-Time</h3>
-                <p>Supports live data ingestion and visualization, as shown by the simulator.</p>
+            <div class="bg-gray-800 p-4 rounded-lg shadow-md text-center">
+                <h3 class="text-xl font-semibold clickhouse-yellow mb-2">Real-Time</h3>
+                <p class="text-sm">Live data updates via the simulator, showcased below.</p>
             </div>
-            <div class="benefit-card">
-                <h3>Open-Source</h3>
-                <p>Free, community-driven tools reduce costs and boost flexibility.</p>
+            <div class="bg-gray-800 p-4 rounded-lg shadow-md text-center">
+                <h3 class="text-xl font-semibold clickhouse-yellow mb-2">Open-Source</h3>
+                <p class="text-sm">Free tools reduce costs and boost flexibility.</p>
             </div>
-            <div class="benefit-card">
-                <h3>Scalable</h3>
-                <p>Built to grow with your data needs, from demos to production.</p>
+            <div class="bg-gray-800 p-4 rounded-lg shadow-md text-center">
+                <h3 class="text-xl font-semibold clickhouse-yellow mb-2">Scalable</h3>
+                <p class="text-sm">Grows from this demo to enterprise-grade analytics.</p>
             </div>
         </div>
 
         <iframe src="{{ grafana_url }}"
+                class="w-full h-[800px] rounded-lg shadow-md bg-gray-900"
                 allowfullscreen>
         </iframe>
     </div>
