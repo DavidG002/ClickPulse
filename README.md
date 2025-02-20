@@ -38,7 +38,7 @@ ClickPulse is a lightweight demo showcasing the power of [ClickHouse](https://cl
      - Local: http://localhost:8000/api/analytics/grafana/.
      - VPS (if deployed): https://clickpulse.daveedg.com/api/analytics/grafana/.
 4. **Stopping the App**:
-d   ```bash
+   ```bash
     docker compose down
      
 - Stops all containers. Add -v to remove volumes (e.g., docker compose down -v).
