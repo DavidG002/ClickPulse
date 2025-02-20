@@ -12,6 +12,7 @@ services:
       - clickhouse
     environment:
       - SECRET_KEY=${SECRET_KEY}
+      - DEBUG=${DEBUG}
 
   postgres:
     image: postgres:13

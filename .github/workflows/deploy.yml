@@ -34,6 +34,7 @@ jobs:
             export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
             export POSTGRES_PORT="${{ secrets.POSTGRES_PORT }}"
             export SECRET_KEY="${{ secrets.SECRET_KEY }}"
+            export DEBUG=false
             # Ensure Git considers this directory safe:
             git config --global --add safe.directory /srv/clickpulse
             git pull origin main
