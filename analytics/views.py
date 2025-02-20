@@ -29,5 +29,5 @@ def grafana_dashboard(request):
     if settings.DEBUG:
         grafana_url = grafana_url = "http://localhost:3000/public-dashboards/f72afd8fdbfd42759197ad85cfa5b1d0"
     else:
-        grafana_url = "https://clickpulse.daveedg.com/grafana-dash/public-dashboards/4322a863d08641a7a36dc54bd2d3c146"
+        grafana_url = "https://bit.ly/clickpulse-demo"
     return render(request, "analytics/grafana_dashboard.html", {"grafana_url": grafana_url})
