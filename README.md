@@ -29,55 +29,57 @@ ClickPulse is a lightweight demo showcasing the power of [ClickHouse](https://cl
    ```bash
    git clone https://github.com/DavidG002/ClickPulse.git
    cd ClickPulse
-Run the App:
-bash
-Wrap
-Copy
-docker compose up --build -d
-Builds and starts all services (web, grafana, clickhouse, etc.).
-Wait ~1 minute for ClickHouse and Grafana to initialize.
-Access the Dashboard:
-Local: http://localhost:8000/api/analytics/grafana/.
-VPS (if deployed): https://clickpulse.daveedg.com/api/analytics/grafana/.
-Running and Stopping the Real-Time Simulator
-Start the Simulator:
-bash
-Wrap
-Copy
-docker exec clickpulse-realtime_simulator-1 touch /code/simulator_flag.txt
-Inserts 5 random records every 2 seconds into ClickHouse.
-Dashboard updates live (e.g., “Latest Transactions” panel).
-Stop the Simulator:
-bash
-Wrap
-Copy
-docker exec clickpulse-realtime_simulator-1 rm /code/simulator_flag.txt
-Pauses insertion—dashboard reflects static data until restarted.
-Stopping the App
-bash
-Wrap
-Copy
-docker compose down
-Stops all containers. Add -v to remove volumes (e.g., docker compose down -v).
-Project Structure
-scripts/ingest_data.py: Loads CSV into ClickHouse.
-scripts/simulate_realtime.py: Real-time data simulator.
-analytics/views.py: Django view for Grafana dashboard.
-provisioning/: Grafana dashboard JSON and datasource config.
-docker-compose.yml: Multi-service orchestration.
-ClickHouse Benefits Showcased
-Simplicity: Easy CSV ingestion and dashboard setup.
-Powerful: Handles 500k+ records with complex queries.
-Fast: Sub-second query execution.
-Real-Time: Live updates via simulator.
-Open-Source: Free, flexible tools.
-Scalable: Ready for larger datasets.
-Deployment
-Deployed via GitHub Actions to a VPS—see .github/workflows/deploy.yml.
-Live at: https://clickpulse.daveedg.com/api/analytics/grafana/.
-Screenshot
- <!-- Add your screenshot here -->
+2. **Run the App**:
+   ```bash
+   docker compose up --build -d
+     - Builds and starts all services (web, grafana, clickhouse, etc.).
+     - Wait ~1 minute for ClickHouse and Grafana to initialize.
+3. **Access the Dashboard**:
+     - Local: http://localhost:8000/api/analytics/grafana/.
+     - VPS (if deployed): https://clickpulse.daveedg.com/api/analytics/grafana/.
+4. **Stopping the App**:
+d   ```bash
+    docker compose down
+     
+- Stops all containers. Add -v to remove volumes (e.g., docker compose down -v).
 
-Acknowledgments
-Dataset: UCI “Online Retail” by Dr. Daqing Chen.
-Tools: ClickHouse, Grafana, Django, Docker.
+## Running and Stopping the Real-Time Simulator
+1. **Start the Simulator**:
+    ```bash
+    docker exec clickpulse-realtime_simulator-1 touch /code/simulator_flag.txt
+        
+        - Inserts 5 random records every 2 seconds into ClickHouse.
+        - Dashboard updates live (e.g., “Latest Transactions” panel).
+
+2. **Stop the Simulator**:
+    ```bash
+    docker exec clickpulse-realtime_simulator-1 rm /code/simulator_flag.txt
+        
+        -Pauses insertion—dashboard reflects static data until restarted.
+
+## Project Structure
+ - scripts/ingest_data.py: Loads CSV into ClickHouse.
+ - scripts/simulate_realtime.py: Real-time data simulator.
+ - analytics/views.py: Django view for Grafana dashboard.
+ - provisioning/: Grafana dashboard JSON and datasource config.
+ - docker-compose.yml: Multi-service orchestration.
+
+## ClickHouse Benefits Showcased
+ - Simplicity: Easy CSV ingestion and dashboard setup.
+ - Powerful: Handles 500k+ records with complex queries.
+ - Fast: Sub-second query execution.
+ - Real-Time: Live updates via simulator.
+ - Open-Source: Free, flexible tools.
+ - Scalable: Ready for larger datasets.
+## Deployment
+ - Deployed via GitHub Actions to a VPS—see .github/workflows/deploy.yml.
+ - Live at: https://clickpulse.daveedg.com/api/analytics/grafana/.
+
+## Screenshot
+
+![alt text](image.png)
+
+
+### Acknowledgments
+ - Dataset: UCI “Online Retail” by Dr. Daqing Chen.
+ - Tools: ClickHouse, Grafana, Django, Docker.
