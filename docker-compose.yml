@@ -29,6 +29,11 @@ services:
       - "9000:9000"  # Native interface
     volumes:
       - clickhouse_data:/var/lib/clickhouse
+    healthcheck:
+      test: ["CMD", "clickhouse-client", "--host=localhost", "--port=9000", "--query=SELECT 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
 
   grafana:
     image: grafana/grafana:latest
@@ -42,6 +47,7 @@ services:
       - GF_SERVER_PROTOCOL=${GF_SERVER_PROTOCOL:-http}
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
+      - GF_INSTALL_PLUGINS=grafana-clickhouse-datasource,simpod-json-datasource
     volumes:
       - grafana_data:/var/lib/grafana
       - ./provisioning/datasources:/etc/grafana/provisioning/datasources
@@ -55,7 +61,8 @@ services:
     volumes:
       - .:/code
     depends_on:
-      - clickhouse
+      clickhouse:
+        condition: service_healthy
     restart: "no"
 
   realtime_simulator:
@@ -64,7 +71,8 @@ services:
     volumes:
       - .:/code
     depends_on:
-      - clickhouse
+      clickhouse:
+        condition: service_healthy
     restart: always
 
 volumes:

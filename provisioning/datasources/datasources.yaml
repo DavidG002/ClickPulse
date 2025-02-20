@@ -1,0 +1,25 @@
+apiVersion: 1
+datasources:
+  - name: "analytics performance"
+    type: "simpod-json-datasource"
+    uid: "simpod_json_ds"
+    access: "proxy"
+    url: "http://web:8000/api/analytics/performance/"
+    isDefault: false
+    editable: false
+    basicAuth: false
+  - name: "ClickPulse Analytics DataSource"
+    type: "grafana-clickhouse-datasource"
+    uid: "clickhouse_ds"
+    access: "proxy"
+    url: "http://clickhouse:8123"
+    isDefault: true
+    editable: false
+    basicAuth: false
+    jsonData:
+      defaultDatabase: "default"
+      port: 8123
+      host: "clickhouse"
+      username: "default"
+      tlsSkipVerify: false
+      protocol: "http"

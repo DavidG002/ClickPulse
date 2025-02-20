@@ -38,6 +38,5 @@ jobs:
             git config --global --add safe.directory /srv/clickpulse
             git pull origin main
             git clean -fd
-            git clean -fd
             docker compose down
-            docker compose up --build -d
+            docker compose up --build --no-cache -d
