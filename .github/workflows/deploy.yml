@@ -23,17 +23,17 @@ jobs:
           script: |
             cd /srv/clickpulse
             # Export production environment variables from GitHub Secrets:
-            export GRAFANA_PORT=${{ secrets.GRAFANA_PORT }}
-            export GF_SERVER_ROOT_URL=${{ secrets.GF_SERVER_ROOT_URL }}
-            export GF_SERVER_SERVE_FROM_SUB_PATH=${{ secrets.GF_SERVER_SERVE_FROM_SUB_PATH }}
-            export GF_SERVER_DOMAIN=${{ secrets.GF_SERVER_DOMAIN }}
-            export GF_SERVER_PROTOCOL=${{ secrets.GF_SERVER_PROTOCOL }}
-            export GF_SECURITY_ADMIN_PASSWORD=${{ secrets.GF_SECURITY_ADMIN_PASSWORD }}
-            export POSTGRES_DB=${{ secrets.POSTGRES_DB }}
-            export POSTGRES_USER=${{ secrets.POSTGRES_USER }}
-            export POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
-            export POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}
-            export SECRET_KEY=${{ secrets.SECRET_KEY }}
+            export GRAFANA_PORT="${{ secrets.GRAFANA_PORT }}"
+            export GF_SERVER_ROOT_URL="${{ secrets.GF_SERVER_ROOT_URL }}"
+            export GF_SERVER_SERVE_FROM_SUB_PATH="${{ secrets.GF_SERVER_SERVE_FROM_SUB_PATH }}"
+            export GF_SERVER_DOMAIN="${{ secrets.GF_SERVER_DOMAIN }}"
+            export GF_SERVER_PROTOCOL="${{ secrets.GF_SERVER_PROTOCOL }}"
+            export GF_SECURITY_ADMIN_PASSWORD="${{ secrets.GF_SECURITY_ADMIN_PASSWORD }}"
+            export POSTGRES_DB="${{ secrets.POSTGRES_DB }}"
+            export POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
+            export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
+            export POSTGRES_PORT="${{ secrets.POSTGRES_PORT }}"
+            export SECRET_KEY="${{ secrets.SECRET_KEY }}"
             export DEBUG=false
             # Ensure Git considers this directory safe:
             git config --global --add safe.directory /srv/clickpulse
