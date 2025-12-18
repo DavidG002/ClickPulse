@@ -26,12 +26,16 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   clickhouse:
-    image: yandex/clickhouse-server:latest
+    image: clickhouse/clickhouse-server:latest
     ports:
       - "8123:8123"  # HTTP interface
       - "9000:9000"  # Native interface
     volumes:
       - clickhouse_data:/var/lib/clickhouse
+    environment:
+      - CLICKHOUSE_USER=${CLICKHOUSE_USER:-default}
+      - CLICKHOUSE_PASSWORD=${CLICKHOUSE_PASSWORD}
+      - CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1
     healthcheck:
       test: ["CMD", "clickhouse-client", "--host=localhost", "--port=9000", "--query=SELECT 1"]
       interval: 5s
@@ -51,6 +55,7 @@ services:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
       - GF_INSTALL_PLUGINS=grafana-clickhouse-datasource,simpod-json-datasource
+      - CLICKHOUSE_PASSWORD=${CLICKHOUSE_PASSWORD}
     volumes:
       - grafana_data:/var/lib/grafana
       - ./provisioning/datasources:/etc/grafana/provisioning/datasources
@@ -63,6 +68,9 @@ services:
     command: python scripts/ingest_data.py
     volumes:
       - .:/code
+    environment:
+      - CLICKHOUSE_USER=${CLICKHOUSE_USER:-default}
+      - CLICKHOUSE_PASSWORD=${CLICKHOUSE_PASSWORD}
     depends_on:
       clickhouse:
         condition: service_healthy
@@ -73,6 +81,9 @@ services:
     command: python scripts/simulate_realtime.py
     volumes:
       - .:/code
+    environment:
+      - CLICKHOUSE_USER=${CLICKHOUSE_USER:-default}
+      - CLICKHOUSE_PASSWORD=${CLICKHOUSE_PASSWORD}
     depends_on:
       clickhouse:
         condition: service_healthy

@@ -2,12 +2,21 @@ import csv
 from clickhouse_driver import Client
 from datetime import datetime
 import time
+import os
 
 def connect_with_retry(host='clickhouse', port=9000, retries=5, delay=5):
     for attempt in range(retries):
         try:
-            client = Client(host=host, port=port)
+            client = Client(
+                host=host,
+                port=port,
+                user=os.getenv('CLICKHOUSE_USER', 'default'),
+                password=os.getenv('CLICKHOUSE_PASSWORD', ''),
+                database='default',
+                secure=False  # Local dev, no TLS
+            )
             client.execute("SELECT 1")  # Test connection
+            print("Connected to ClickHouse successfully.")
             return client
         except Exception as e:
             print(f"Attempt {attempt + 1}/{retries} failed: {e}")
@@ -15,7 +24,7 @@ def connect_with_retry(host='clickhouse', port=9000, retries=5, delay=5):
                 time.sleep(delay)
             else:
                 raise Exception("Failed to connect to ClickHouse after retries")
-
+            
 # Connect to ClickHouse with retry
 client = connect_with_retry(host='clickhouse', port=9000)
 

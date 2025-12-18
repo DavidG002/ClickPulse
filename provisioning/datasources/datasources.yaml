@@ -8,6 +8,7 @@ datasources:
     isDefault: false
     editable: false
     basicAuth: false
+
   - name: "ClickPulse Analytics DataSource"
     type: "grafana-clickhouse-datasource"
     uid: "clickhouse_ds"
@@ -15,11 +16,12 @@ datasources:
     url: "http://clickhouse:8123"
     isDefault: true
     editable: false
-    basicAuth: false
     jsonData:
       defaultDatabase: "default"
       port: 8123
       host: "clickhouse"
       username: "default"
-      tlsSkipVerify: false
+      tlsSkipVerify: true   # Recommended: true for local dev (self-signed or no TLS)
       protocol: "http"
+    secureJsonData:
+      password: "${CLICKHOUSE_PASSWORD}"   # This pulls from environment

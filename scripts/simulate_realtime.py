@@ -6,8 +6,15 @@ import signal
 import sys
 import os
 
-# Connect to ClickHouse
-client = Client(host='clickhouse', port=9000)
+# Connect to ClickHouse with credentials
+client = Client(
+    host='clickhouse',
+    port=9000,
+    user=os.getenv('CLICKHOUSE_USER', 'default'),
+    password=os.getenv('CLICKHOUSE_PASSWORD', ''),
+    database='default',
+    secure=False
+)
 
 # Global flag to control running
 RUNNING = True
